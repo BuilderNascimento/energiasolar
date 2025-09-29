@@ -68,7 +68,7 @@ export async function seedDatabase() {
   try {
     // Criar usuário admin padrão
     const hashedPassword = await bcrypt.hash('password', 10);
-    const adminUser = await prisma.user.upsert({
+    await prisma.user.upsert({
       where: { email: 'admin@energiasolar.com' },
       update: {},
       create: {

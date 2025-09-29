@@ -73,7 +73,7 @@ export async function GET(request: NextRequest) {
     const status = searchParams.get('status');
     
     // Construir filtros
-    const where: any = {};
+    const where: { status?: string } = {};
     if (status) {
       where.status = status.toUpperCase();
     }

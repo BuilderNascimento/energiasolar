@@ -177,11 +177,11 @@ export interface ApiError {
   success: false;
   message: string;
   code?: string;
-  details?: any;
+  details?: Record<string, unknown>;
 }
 
 // Tipos para Respostas Genéricas
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   message: string;
   data?: T;
@@ -218,7 +218,7 @@ export interface SimulationFilters extends PaginationParams {
 // Tipos para Webhooks e Integrações
 export interface WebhookPayload {
   event: string;
-  data: any;
+  data: Record<string, unknown>;
   timestamp: string;
   source: string;
 }
