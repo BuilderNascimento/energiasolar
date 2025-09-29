@@ -543,13 +543,7 @@ Tipo: ${dados.tipo}`;
 
 
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % scooters.length);
-  };
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + scooters.length) % scooters.length);
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
@@ -1516,9 +1510,11 @@ Tipo: ${dados.tipo}`;
                 <Card className="border-0 shadow-lg hover:shadow-xl bg-white overflow-hidden h-full rounded-xl transition-all duration-300 hover:-translate-y-1">
                   {/* Imagem do Produto - Grande no topo */}
                   <div className="relative overflow-hidden bg-white">
-                    <img 
+                    <Image 
                       src={scooter.image} 
                       alt={scooter.name}
+                      width={400}
+                      height={224}
                       className="w-full h-56 object-contain p-4 group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
