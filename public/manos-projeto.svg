@@ -1,0 +1,108 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0F6FF;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="buildingGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D3D3D3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A9A9A9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="panelGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3a8a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Sky background -->
+  <rect width="400" height="180" fill="url(#skyGradient)"/>
+  
+  <!-- Sun -->
+  <circle cx="350" cy="40" r="20" fill="#FFD700" opacity="0.9"/>
+  <g stroke="#FFD700" stroke-width="2" opacity="0.7">
+    <line x1="350" y1="15" x2="350" y2="8"/>
+    <line x1="350" y1="72" x2="350" y2="65"/>
+    <line x1="325" y1="40" x2="318" y2="40"/>
+    <line x1="382" y1="40" x2="375" y2="40"/>
+    <line x1="332" y1="22" x2="327" y2="17"/>
+    <line x1="373" y1="63" x2="368" y2="58"/>
+    <line x1="368" y1="22" x2="373" y2="17"/>
+    <line x1="327" y1="63" x2="332" y2="58"/>
+  </g>
+  
+  <!-- Ground -->
+  <rect x="0" y="180" width="400" height="120" fill="#C0C0C0"/>
+  
+  <!-- Industrial building -->
+  <rect x="50" y="100" width="300" height="80" fill="url(#buildingGradient)"/>
+  
+  <!-- Flat roof -->
+  <rect x="45" y="95" width="310" height="10" fill="#696969"/>
+  
+  <!-- Large solar panel array on roof -->
+  <g>
+    <!-- Row 1 -->
+    <rect x="60" y="75" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="90" y="75" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="120" y="75" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="150" y="75" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="180" y="75" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="210" y="75" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="240" y="75" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="270" y="75" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="300" y="75" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="330" y="75" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    
+    <!-- Row 2 -->
+    <rect x="60" y="50" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="90" y="50" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="120" y="50" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="150" y="50" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="180" y="50" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="210" y="50" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="240" y="50" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="270" y="50" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="300" y="50" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="330" y="50" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    
+    <!-- Row 3 -->
+    <rect x="60" y="25" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="90" y="25" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="120" y="25" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="150" y="25" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="180" y="25" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="210" y="25" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="240" y="25" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="270" y="25" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="300" y="25" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+    <rect x="330" y="25" width="25" height="20" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="0.5"/>
+  </g>
+  
+  <!-- Building details -->
+  <!-- Large industrial doors -->
+  <rect x="80" y="140" width="60" height="40" fill="#4682B4" stroke="#2F4F4F" stroke-width="2"/>
+  <rect x="260" y="140" width="60" height="40" fill="#4682B4" stroke="#2F4F4F" stroke-width="2"/>
+  
+  <!-- Windows -->
+  <rect x="140" y="120" width="20" height="15" fill="#87CEEB" stroke="#2F4F4F" stroke-width="1"/>
+  <rect x="170" y="120" width="20" height="15" fill="#87CEEB" stroke="#2F4F4F" stroke-width="1"/>
+  <rect x="200" y="120" width="20" height="15" fill="#87CEEB" stroke="#2F4F4F" stroke-width="1"/>
+  <rect x="230" y="120" width="20" height="15" fill="#87CEEB" stroke="#2F4F4F" stroke-width="1"/>
+  
+  <!-- Company sign -->
+  <rect x="160" y="200" width="80" height="25" fill="#1e40af" rx="3"/>
+  <text x="170" y="217" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">DISTRIBUIDORA</text>
+  
+  <!-- Trucks/vehicles -->
+  <rect x="15" y="220" width="40" height="15" fill="#FF6347" rx="2"/>
+  <circle cx="25" cy="240" r="5" fill="#2F4F4F"/>
+  <circle cx="45" cy="240" r="5" fill="#2F4F4F"/>
+  
+  <rect x="345" y="225" width="35" height="12" fill="#32CD32" rx="2"/>
+  <circle cx="353" cy="242" r="4" fill="#2F4F4F"/>
+  <circle cx="372" cy="242" r="4" fill="#2F4F4F"/>
+  
+  <!-- Project label -->
+  <rect x="10" y="10" width="200" height="30" fill="rgba(255,255,255,0.9)" rx="5"/>
+  <text x="20" y="30" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1e40af">Projeto Manos Distribuidora</text>
+</svg>

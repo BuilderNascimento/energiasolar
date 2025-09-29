@@ -1,0 +1,51 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#f8f9fa"/>
+  
+  <!-- Patinete Base -->
+  <rect x="50" y="200" width="300" height="15" rx="7" fill="#2c3e50"/>
+  
+  <!-- Guidão -->
+  <rect x="320" y="80" width="8" height="120" fill="#34495e"/>
+  <rect x="300" y="80" width="48" height="8" rx="4" fill="#34495e"/>
+  
+  <!-- Punhos -->
+  <circle cx="305" cy="84" r="6" fill="#e74c3c"/>
+  <circle cx="343" cy="84" r="6" fill="#e74c3c"/>
+  
+  <!-- Roda Traseira -->
+  <circle cx="80" cy="230" r="25" fill="#2c3e50" stroke="#34495e" stroke-width="3"/>
+  <circle cx="80" cy="230" r="15" fill="#95a5a6"/>
+  <circle cx="80" cy="230" r="8" fill="#2c3e50"/>
+  
+  <!-- Roda Dianteira -->
+  <circle cx="320" cy="230" r="25" fill="#2c3e50" stroke="#34495e" stroke-width="3"/>
+  <circle cx="320" cy="230" r="15" fill="#95a5a6"/>
+  <circle cx="320" cy="230" r="8" fill="#2c3e50"/>
+  
+  <!-- Suporte Vertical -->
+  <rect x="316" y="200" width="8" height="30" fill="#34495e"/>
+  
+  <!-- Freio -->
+  <rect x="290" y="95" width="15" height="8" rx="4" fill="#e74c3c"/>
+  
+  <!-- Display/Painel -->
+  <rect x="310" y="100" width="25" height="15" rx="3" fill="#3498db"/>
+  <rect x="312" y="102" width="21" height="11" rx="2" fill="#2980b9"/>
+  
+  <!-- Detalhes decorativos -->
+  <rect x="100" y="195" width="150" height="3" fill="#e74c3c"/>
+  <rect x="120" y="190" width="110" height="2" fill="#f39c12"/>
+  
+  <!-- Texto indicativo -->
+  <text x="200" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2c3e50">PATINETE ELÉTRICO</text>
+  <text x="200" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#7f8c8d">Dobrável • Portátil • Ecológico</text>
+  
+  <!-- Cores disponíveis -->
+  <circle cx="150" cy="270" r="8" fill="#2c3e50"/>
+  <circle cx="170" cy="270" r="8" fill="#e74c3c"/>
+  <circle cx="190" cy="270" r="8" fill="#3498db"/>
+  <circle cx="210" cy="270" r="8" fill="#ffffff" stroke="#bdc3c7" stroke-width="2"/>
+  
+  <text x="200" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#7f8c8d">Cores Disponíveis</text>
+</svg>

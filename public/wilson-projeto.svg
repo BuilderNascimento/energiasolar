@@ -1,0 +1,92 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0F6FF;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="roofGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A0522D;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="panelGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3a8a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Sky background -->
+  <rect width="400" height="150" fill="url(#skyGradient)"/>
+  
+  <!-- Sun -->
+  <circle cx="350" cy="50" r="25" fill="#FFD700" opacity="0.9"/>
+  <g stroke="#FFD700" stroke-width="2" opacity="0.7">
+    <line x1="350" y1="15" x2="350" y2="5"/>
+    <line x1="350" y1="95" x2="350" y2="85"/>
+    <line x1="315" y1="50" x2="305" y2="50"/>
+    <line x1="395" y1="50" x2="385" y2="50"/>
+    <line x1="325" y1="25" x2="318" y2="18"/>
+    <line x1="382" y1="82" x2="375" y2="75"/>
+    <line x1="375" y1="25" x2="382" y2="18"/>
+    <line x1="318" y1="82" x2="325" y2="75"/>
+  </g>
+  
+  <!-- Ground -->
+  <rect x="0" y="150" width="400" height="150" fill="#90EE90"/>
+  
+  <!-- House structure -->
+  <rect x="80" y="120" width="240" height="120" fill="#F5DEB3"/>
+  
+  <!-- Roof -->
+  <polygon points="60,120 200,60 340,120" fill="url(#roofGradient)"/>
+  
+  <!-- Solar panels on roof -->
+  <g>
+    <!-- Panel row 1 -->
+    <rect x="120" y="75" width="35" height="25" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="1"/>
+    <rect x="160" y="75" width="35" height="25" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="1"/>
+    <rect x="200" y="75" width="35" height="25" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="1"/>
+    <rect x="240" y="75" width="35" height="25" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="1"/>
+    
+    <!-- Panel row 2 -->
+    <rect x="130" y="95" width="35" height="25" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="1"/>
+    <rect x="170" y="95" width="35" height="25" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="1"/>
+    <rect x="210" y="95" width="35" height="25" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="1"/>
+    <rect x="250" y="95" width="35" height="25" fill="url(#panelGradient)" stroke="#1e40af" stroke-width="1"/>
+    
+    <!-- Panel grid lines -->
+    <g stroke="#1e40af" stroke-width="0.5" opacity="0.7">
+      <!-- Vertical lines -->
+      <line x1="137" y1="75" x2="137" y2="100"/>
+      <line x1="177" y1="75" x2="177" y2="100"/>
+      <line x1="217" y1="75" x2="217" y2="100"/>
+      <line x1="257" y1="75" x2="257" y2="100"/>
+      <!-- Horizontal lines -->
+      <line x1="120" y1="87" x2="275" y2="87"/>
+      <line x1="130" y1="107" x2="285" y2="107"/>
+    </g>
+  </g>
+  
+  <!-- House details -->
+  <!-- Door -->
+  <rect x="180" y="200" width="40" height="40" fill="#8B4513"/>
+  <circle cx="210" cy="220" r="2" fill="#FFD700"/>
+  
+  <!-- Windows -->
+  <rect x="100" y="160" width="30" height="30" fill="#87CEEB" stroke="#654321" stroke-width="2"/>
+  <rect x="270" y="160" width="30" height="30" fill="#87CEEB" stroke="#654321" stroke-width="2"/>
+  <line x1="115" y1="160" x2="115" y2="190" stroke="#654321" stroke-width="1"/>
+  <line x1="100" y1="175" x2="130" y2="175" stroke="#654321" stroke-width="1"/>
+  <line x1="285" y1="160" x2="285" y2="190" stroke="#654321" stroke-width="1"/>
+  <line x1="270" y1="175" x2="300" y2="175" stroke="#654321" stroke-width="1"/>
+  
+  <!-- Trees -->
+  <circle cx="30" cy="200" r="25" fill="#228B22"/>
+  <rect x="27" y="200" width="6" height="30" fill="#8B4513"/>
+  
+  <circle cx="370" cy="210" r="20" fill="#228B22"/>
+  <rect x="368" y="210" width="4" height="25" fill="#8B4513"/>
+  
+  <!-- Project label -->
+  <rect x="10" y="10" width="180" height="30" fill="rgba(255,255,255,0.9)" rx="5"/>
+  <text x="20" y="30" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1e40af">Projeto Wilson - Bauru</text>
+</svg>

@@ -1,0 +1,67 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#f8f9fa"/>
+  
+  <!-- Quadro Principal -->
+  <path d="M80 180 L200 120 L280 180 L200 200 Z" fill="#3498db" stroke="#2980b9" stroke-width="3"/>
+  
+  <!-- Tubo Superior -->
+  <rect x="80" y="175" width="200" height="8" fill="#2980b9" transform="rotate(-15 180 179)"/>
+  
+  <!-- Tubo do Assento -->
+  <rect x="195" y="120" width="8" height="80" fill="#2980b9"/>
+  
+  <!-- Assento -->
+  <ellipse cx="200" cy="115" rx="25" ry="8" fill="#2c3e50"/>
+  
+  <!-- Guidão -->
+  <rect x="275" y="140" width="8" height="40" fill="#34495e"/>
+  <rect x="260" y="140" width="38" height="6" rx="3" fill="#34495e"/>
+  
+  <!-- Punhos -->
+  <circle cx="264" cy="143" r="5" fill="#e74c3c"/>
+  <circle cx="294" cy="143" r="5" fill="#e74c3c"/>
+  
+  <!-- Roda Traseira -->
+  <circle cx="80" cy="220" r="35" fill="#2c3e50" stroke="#34495e" stroke-width="4"/>
+  <circle cx="80" cy="220" r="25" fill="#95a5a6"/>
+  <circle cx="80" cy="220" r="15" fill="#2c3e50"/>
+  <circle cx="80" cy="220" r="8" fill="#ecf0f1"/>
+  
+  <!-- Roda Dianteira -->
+  <circle cx="280" cy="220" r="35" fill="#2c3e50" stroke="#34495e" stroke-width="4"/>
+  <circle cx="280" cy="220" r="25" fill="#95a5a6"/>
+  <circle cx="280" cy="220" r="15" fill="#2c3e50"/>
+  <circle cx="280" cy="220" r="8" fill="#ecf0f1"/>
+  
+  <!-- Pedais -->
+  <circle cx="150" cy="200" r="12" fill="#34495e"/>
+  <rect x="145" y="195" width="10" height="10" fill="#2c3e50"/>
+  
+  <!-- Corrente -->
+  <path d="M150 200 Q120 210 80 220" stroke="#7f8c8d" stroke-width="2" fill="none"/>
+  
+  <!-- Bateria -->
+  <rect x="120" y="160" width="60" height="25" rx="5" fill="#27ae60"/>
+  <rect x="125" y="165" width="50" height="15" rx="3" fill="#2ecc71"/>
+  <text x="150" y="177" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white" font-weight="bold">48V</text>
+  
+  <!-- Display -->
+  <rect x="265" y="155" width="20" height="12" rx="2" fill="#3498db"/>
+  <rect x="267" y="157" width="16" height="8" rx="1" fill="#2980b9"/>
+  
+  <!-- Cesta Dianteira -->
+  <rect x="290" y="160" width="30" height="20" rx="3" fill="none" stroke="#7f8c8d" stroke-width="2"/>
+  <rect x="292" y="162" width="26" height="16" rx="2" fill="#ecf0f1" opacity="0.3"/>
+  
+  <!-- Texto -->
+  <text x="200" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2c3e50">BIKE ELÉTRICA WX-03</text>
+  <text x="200" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#7f8c8d">Motor 600W • 25km/h • Dispensa CNH</text>
+  
+  <!-- Cores disponíveis -->
+  <circle cx="160" cy="270" r="8" fill="#3498db"/>
+  <circle cx="180" cy="270" r="8" fill="#2c3e50"/>
+  <circle cx="200" cy="270" r="8" fill="#ffffff" stroke="#bdc3c7" stroke-width="2"/>
+  
+  <text x="180" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#7f8c8d">Cores Disponíveis</text>
+</svg>

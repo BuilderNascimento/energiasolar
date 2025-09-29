@@ -1,0 +1,79 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#f8f9fa"/>
+  
+  <!-- Corpo Principal do Scooter -->
+  <path d="M60 180 Q80 160 120 160 L280 160 Q320 160 340 180 L340 200 Q320 220 280 220 L120 220 Q80 220 60 200 Z" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="3"/>
+  
+  <!-- Assento -->
+  <ellipse cx="200" cy="140" rx="40" ry="15" fill="#2c3e50"/>
+  <ellipse cx="200" cy="135" rx="38" ry="12" fill="#34495e"/>
+  
+  <!-- Guidão -->
+  <rect x="295" y="120" width="8" height="40" fill="#34495e"/>
+  <rect x="275" y="120" width="48" height="8" rx="4" fill="#34495e"/>
+  
+  <!-- Punhos -->
+  <circle cx="280" cy="124" r="6" fill="#e74c3c"/>
+  <circle cx="318" cy="124" r="6" fill="#e74c3c"/>
+  
+  <!-- Para-brisa -->
+  <path d="M290 120 Q300 100 310 120" fill="#3498db" opacity="0.3" stroke="#2980b9" stroke-width="2"/>
+  
+  <!-- Roda Traseira -->
+  <circle cx="100" cy="240" r="30" fill="#2c3e50" stroke="#34495e" stroke-width="4"/>
+  <circle cx="100" cy="240" r="20" fill="#95a5a6"/>
+  <circle cx="100" cy="240" r="12" fill="#2c3e50"/>
+  <circle cx="100" cy="240" r="6" fill="#ecf0f1"/>
+  
+  <!-- Roda Dianteira -->
+  <circle cx="300" cy="240" r="30" fill="#2c3e50" stroke="#34495e" stroke-width="4"/>
+  <circle cx="300" cy="240" r="20" fill="#95a5a6"/>
+  <circle cx="300" cy="240" r="12" fill="#2c3e50"/>
+  <circle cx="300" cy="240" r="6" fill="#ecf0f1"/>
+  
+  <!-- Suspensão Traseira -->
+  <rect x="95" y="210" width="10" height="30" fill="#7f8c8d"/>
+  <circle cx="100" cy="210" r="5" fill="#34495e"/>
+  
+  <!-- Suspensão Dianteira -->
+  <rect x="295" y="160" width="10" height="50" fill="#7f8c8d"/>
+  
+  <!-- Bateria -->
+  <rect x="150" y="170" width="100" height="30" rx="8" fill="#27ae60"/>
+  <rect x="155" y="175" width="90" height="20" rx="5" fill="#2ecc71"/>
+  <text x="200" y="188" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white" font-weight="bold">60V 20Ah</text>
+  
+  <!-- Painel Digital -->
+  <rect x="285" y="135" width="30" height="20" rx="5" fill="#2c3e50"/>
+  <rect x="287" y="137" width="26" height="16" rx="3" fill="#3498db"/>
+  <text x="300" y="147" text-anchor="middle" font-family="Arial, sans-serif" font-size="6" fill="white">LCD</text>
+  
+  <!-- Farol -->
+  <circle cx="320" cy="150" r="8" fill="#f1c40f" stroke="#f39c12" stroke-width="2"/>
+  <circle cx="320" cy="150" r="5" fill="#ffffff"/>
+  
+  <!-- Lanterna Traseira -->
+  <circle cx="80" cy="190" r="6" fill="#e74c3c"/>
+  <circle cx="80" cy="190" r="3" fill="#c0392b"/>
+  
+  <!-- Espelhos -->
+  <circle cx="275" cy="118" r="4" fill="#95a5a6"/>
+  <circle cx="323" cy="118" r="4" fill="#95a5a6"/>
+  
+  <!-- Compartimento de Armazenamento -->
+  <rect x="120" y="200" width="60" height="15" rx="3" fill="#34495e"/>
+  <rect x="122" y="202" width="56" height="11" rx="2" fill="#2c3e50"/>
+  
+  <!-- Texto -->
+  <text x="200" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#2c3e50">SCOOTER WX-05</text>
+  <text x="200" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#7f8c8d">Motor 1200W • 45km/h • Autonomia 60km</text>
+  
+  <!-- Cores disponíveis -->
+  <circle cx="150" cy="275" r="8" fill="#ffffff" stroke="#bdc3c7" stroke-width="2"/>
+  <circle cx="170" cy="275" r="8" fill="#2c3e50"/>
+  <circle cx="190" cy="275" r="8" fill="#e74c3c"/>
+  <circle cx="210" cy="275" r="8" fill="#3498db"/>
+  
+  <text x="180" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#7f8c8d">Cores Disponíveis</text>
+</svg>
