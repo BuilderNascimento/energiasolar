@@ -110,7 +110,7 @@ export async function POST(request: NextRequest) {
       data: {
         monthlyBill: validatedData.monthlyBill,
         location: validatedData.location,
-        installationType: validatedData.installationType.toUpperCase() as any,
+        installationType: validatedData.installationType.toUpperCase() as 'RESIDENCIAL' | 'COMERCIAL' | 'INDUSTRIAL',
         monthlyConsumption: validatedData.monthlyConsumption,
         roofArea: validatedData.roofArea,
         residents: validatedData.residents,

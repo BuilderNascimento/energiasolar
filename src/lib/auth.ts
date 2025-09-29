@@ -5,7 +5,7 @@ import { prisma } from "@/lib/db"
 import bcrypt from "bcryptjs"
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma) as any,
+  adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       name: "credentials",
@@ -52,7 +52,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.role = (user as any).role
+        token.role = (user as { role: string }).role
       }
       return token
     },

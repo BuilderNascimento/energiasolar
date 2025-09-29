@@ -11,6 +11,20 @@ import { ChevronLeft, ChevronRight, Sun, Zap, DollarSign, Leaf, Shield, Award, S
 import Chatbot from "@/components/Chatbot";
 import Carousel from "@/components/Carousel";
 
+// Interface para o Supabase client
+interface SupabaseClient {
+  from: (table: string) => {
+    insert: (data: Record<string, unknown>[]) => Promise<{
+      data: Record<string, unknown>[] | null;
+      error: { message: string } | null;
+    }>;
+  };
+}
+
+interface WindowWithSupabase extends Window {
+  supabaseClient?: SupabaseClient;
+}
+
 // Interface para resultados da simulação
 interface SimulationResults {
   panels: number;
@@ -386,10 +400,16 @@ Tipo: ${dados.tipo}`;
   };
 
   // Função para salvar lead no Supabase
-  const saveLeadToSupabase = async (leadData: any) => {
+  const saveLeadToSupabase = async (leadData: {
+    name: string;
+    email: string;
+    phone: string;
+    interest: string;
+    message: string;
+  }) => {
     try {
-      if (typeof window !== 'undefined' && (window as any).supabaseClient) {
-        const { data, error } = await (window as any).supabaseClient
+      if (typeof window !== 'undefined' && (window as WindowWithSupabase).supabaseClient) {
+        const { data, error } = await (window as WindowWithSupabase).supabaseClient
           .from('leads')
           .insert([
             {
@@ -415,10 +435,23 @@ Tipo: ${dados.tipo}`;
   };
 
   // Função para salvar simulação no Supabase
-  const saveSimulationToSupabase = async (simulationData: any, formData: any) => {
+  const saveSimulationToSupabase = async (simulationData: {
+    monthlyEconomy: number;
+    totalEconomy: number;
+    systemPower: number;
+    panelCount: number;
+    roofArea: number;
+    co2Reduction: number;
+  }, formData: {
+    monthlyBill: number;
+    installationType: string;
+    roofType: string;
+    hasShading: boolean;
+    location: string;
+  }) => {
     try {
-      if (typeof window !== 'undefined' && (window as any).supabaseClient) {
-        const { data, error } = await (window as any).supabaseClient
+      if (typeof window !== 'undefined' && (window as WindowWithSupabase).supabaseClient) {
+        const { data, error } = await (window as WindowWithSupabase).supabaseClient
           .from('simulations')
           .insert([
             {

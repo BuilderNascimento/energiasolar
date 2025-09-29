@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { X, Send, Bot, User, Sun, Cpu } from "lucide-react";
+import { X, Send, Bot, User } from "lucide-react";
 import Image from 'next/image';
 import OpenAI from 'openai';
 
