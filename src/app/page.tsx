@@ -417,19 +417,18 @@ Tipo: ${dados.tipo}`;
         console.log('✅ Cliente Supabase encontrado, enviando dados...');
         
         const dataToInsert = {
-          full_name: leadData.name,
+          fullName: leadData.name,
           email: leadData.email || 'nao-informado@email.com',
           phone: leadData.phone,
-          monthly_bill: parseFloat(monthlyBill || '0'),
+          monthlyBill: monthlyBill || '0',
           location: location || 'Não informado',
-          installation_type: installationType || 'residencial',
+          installationType: installationType || 'residencial',
           interest: leadData.interest,
           message: leadData.message,
-          monthly_consumption: monthlyConsumption || '',
+          monthlyConsumption: monthlyConsumption || '',
           residents: residents || '',
-          roof_area: roofArea || '',
-          source: 'website_form',
-          created_at: new Date().toISOString()
+          roofArea: roofArea || '',
+          source: 'website_form'
         };
         
         console.log('📤 Dados a serem inseridos:', dataToInsert);
@@ -476,24 +475,23 @@ Tipo: ${dados.tipo}`;
         console.log('✅ Cliente Supabase encontrado, enviando dados...');
         
         const dataToInsert = {
-          monthly_bill: parseFloat(monthlyBill || '0'),
+          monthlyBill: parseFloat(monthlyBill || '0'),
           location: location || 'Não informado',
-          installation_type: installationType || 'residencial',
-          full_name: fullName || 'Não informado',
-          phone: phone || 'Não informado',
+          installationType: installationType || 'residencial',
+          monthlyConsumption: parseFloat(monthlyConsumption || '0'),
+          roofArea: simulationData.roofArea,
+          residents: parseInt(residents || '0'),
           panels: simulationData.panelCount,
-          system_size: simulationData.systemPower,
-          monthly_production: simulationData.monthlyEconomy,
-          monthly_savings: simulationData.monthlyEconomy,
-          annual_savings: simulationData.monthlyEconomy * 12,
-          system_cost: simulationData.systemPower * 4800,
-          payback_years: (simulationData.systemPower * 4800) / (simulationData.monthlyEconomy * 12),
-          roi: ((simulationData.totalEconomy - (simulationData.systemPower * 4800)) / (simulationData.systemPower * 4800)) * 100,
-          co2_reduction: simulationData.co2Reduction,
-          savings_in_25_years: simulationData.totalEconomy,
-          region_factor: 4.7,
-          source: 'website_simulator',
-          created_at: new Date().toISOString()
+          monthlyProduction: simulationData.monthlyEconomy,
+          monthlySavings: simulationData.monthlyEconomy,
+          annualSavings: simulationData.monthlyEconomy * 12,
+          paybackPeriod: (simulationData.systemPower * 4800) / (simulationData.monthlyEconomy * 12),
+          co2Reduction: simulationData.co2Reduction,
+          savingsPercentage: ((simulationData.monthlyEconomy / parseFloat(monthlyBill || '0')) * 100),
+          installationCost: simulationData.systemPower * 4800,
+          systemPower: simulationData.systemPower,
+          region: location || 'Não informado',
+          locationFactor: 4.7
         };
         
         console.log('📤 Dados a serem inseridos:', dataToInsert);
@@ -1365,139 +1363,85 @@ Tipo: ${dados.tipo}`;
           </div>
           
           <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 md:p-12 border border-white/20">
-             <form id="formularioOrcamento" className="space-y-6" onSubmit={handleWhatsAppSubmit}>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <Label htmlFor="leadName" className="text-sm font-semibold text-gray-700 mb-2 block">
-                    Nome Completo *
-                  </Label>
-                  <Input
-                     id="nome"
-                     name="name"
-                     type="text"
-                     placeholder="Seu nome completo"
-                     value={leadForm.name}
-                     onChange={handleLeadFormChange}
-                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-gray-900 placeholder-gray-500"
-                     required
-                   />
-                </div>
-                
-                <div>
-                  <Label htmlFor="leadEmail" className="text-sm font-semibold text-gray-700 mb-2 block">
-                    E-mail *
-                  </Label>
-                  <Input
-                     id="email"
-                     name="email"
-                     type="email"
-                     placeholder="seu@email.com"
-                     value={leadForm.email}
-                     onChange={handleLeadFormChange}
-                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-gray-900 placeholder-gray-500"
-                     required
-                   />
-                </div>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <Label htmlFor="leadPhone" className="text-sm font-semibold text-gray-700 mb-2 block">
-                    WhatsApp *
-                  </Label>
-                  <Input
-                     id="telefone"
-                     name="phone"
-                     type="tel"
-                     placeholder="(00) 00000-0000"
-                     value={leadForm.phone}
-                     onChange={handleLeadFormChange}
-                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-gray-900 placeholder-gray-500"
-                     required
-                   />
-                </div>
-                
-                <div>
-                  <Label htmlFor="leadInterest" className="text-sm font-semibold text-gray-700 mb-2 block">
-                    Interesse Principal
-                  </Label>
-                  <select
-                     id="tipo"
-                     name="interest"
-                     value={leadForm.interest}
-                     onChange={handleLeadFormChange}
-                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-gray-900 bg-white"
-                   >
-                    <option value="">Selecione uma opção</option>
-                    <option value="residencial">Energia Solar Residencial</option>
-                    <option value="comercial">Energia Solar Comercial</option>
-                    <option value="rural">Energia Solar Rural</option>
-                    <option value="mobilidade">Mobilidade Elétrica</option>
-                    <option value="orcamento">Orçamento Personalizado</option>
-                  </select>
-                </div>
-              </div>
-              
-              <div>
-                <Label htmlFor="consumo" className="text-sm font-semibold text-gray-700 mb-2 block">
-                  Consumo Mensal (kWh)
-                </Label>
-                <Input
-                   id="consumo"
-                   name="consumption"
-                   type="number"
-                   placeholder="Ex: 300"
-                   value={leadForm.consumption || ''}
-                   onChange={handleLeadFormChange}
-                   className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-gray-900 placeholder-gray-500"
-                 />
-              </div>
-              
-              <div>
-                <Label htmlFor="leadMessage" className="text-sm font-semibold text-gray-700 mb-2 block">
-                  Mensagem (Opcional)
-                </Label>
-                <textarea
-                   id="leadMessage"
-                   name="message"
-                   rows={4}
-                   placeholder="Conte-nos mais sobre seu projeto ou dúvidas..."
-                   value={leadForm.message}
-                   onChange={handleLeadFormChange}
-                   className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 text-gray-900 placeholder-gray-500 resize-none"
-                 ></textarea>
-              </div>
-              
-              {/* Mensagem de Sucesso */}
-              <div id="mensagemSucesso" style={{display: 'none'}} className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-xl mb-4">
-                ✅ Formulário enviado com sucesso! Você será redirecionado para o WhatsApp.
-              </div>
-              
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button 
-                   type="submit"
-                   disabled={isSubmitting || !leadForm.name || !leadForm.email || !leadForm.phone}
-                   className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 text-lg"
-                 >
-                   {isSubmitting ? '⏳ Enviando...' : '💬 Enviar via WhatsApp'}
-                 </Button>
-                 
-                 <Button 
-                   type="button"
-                   onClick={handleEmailSubmit}
-                   disabled={isSubmitting || !leadForm.name || !leadForm.email || !leadForm.phone}
-                   className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed text-white font-bold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 text-lg"
-                 >
-                   {isSubmitting ? '⏳ Enviando...' : '📧 Receber por E-mail'}
-                 </Button>
-              </div>
-              
-              <div className="text-center pt-4">
-                <p className="text-sm text-gray-600">
-                  🔒 Seus dados estão seguros conosco. Não compartilhamos informações pessoais.
+            <div className="text-center space-y-8">
+              <div className="space-y-4">
+                <h3 className="text-2xl md:text-3xl font-bold text-gray-800">
+                  📋 Solicite Seu Orçamento Personalizado
+                </h3>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                  Preencha nosso formulário rápido e seguro para receber uma proposta detalhada de energia solar personalizada para você!
                 </p>
               </div>
-            </form>
+              
+              <div className="grid md:grid-cols-3 gap-6 my-8">
+                <div className="text-center">
+                  <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                    <Users className="w-8 h-8 text-blue-600" />
+                  </div>
+                  <h4 className="font-semibold text-gray-800 mb-2">Dados Pessoais</h4>
+                  <p className="text-sm text-gray-600">Nome, email e telefone</p>
+                </div>
+                <div className="text-center">
+                  <div className="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                    <Zap className="w-8 h-8 text-green-600" />
+                  </div>
+                  <h4 className="font-semibold text-gray-800 mb-2">Consumo de Energia</h4>
+                  <p className="text-sm text-gray-600">Conta de luz e consumo</p>
+                </div>
+                <div className="text-center">
+                  <div className="bg-yellow-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-3">
+                    <Sun className="w-8 h-8 text-yellow-600" />
+                  </div>
+                  <h4 className="font-semibold text-gray-800 mb-2">Projeto Solar</h4>
+                  <p className="text-sm text-gray-600">Tipo de instalação e localização</p>
+                </div>
+              </div>
+              
+              <div className="space-y-6">
+                <Button 
+                  onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSdZm7oKgwx7oO660hKKMBU3waQ0TqCq_hZH3BVUTekFnZsjtw/viewform?usp=header', '_blank')}
+                  className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-6 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 text-xl"
+                >
+                  📝 Preencher Formulário no Google Forms
+                </Button>
+                
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Button 
+                    onClick={() => {
+                      const message = `🌟 Olá! Gostaria de receber um orçamento personalizado de energia solar da Nova Era Solar!\n\n📱 Vim através do site e tenho interesse em conhecer as soluções disponíveis.\n\n⚡ Aguardo retorno!`;
+                      const whatsappUrl = `https://wa.me/5514998205972?text=${encodeURIComponent(message)}`;
+                      window.open(whatsappUrl, '_blank');
+                    }}
+                    className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
+                  >
+                    💬 Falar no WhatsApp
+                  </Button>
+                  
+                  <Button 
+                    onClick={() => {
+                      const subject = 'Solicitação de Orçamento - Energia Solar';
+                      const body = `Olá Nova Era Solar!\n\nGostaria de receber um orçamento personalizado para energia solar.\n\nVim através do site e tenho interesse em conhecer as soluções disponíveis.\n\nAguardo retorno!\n\nAtenciosamente`;
+                      const mailtoUrl = `mailto:novaera.solar.projetos@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                      window.location.href = mailtoUrl;
+                    }}
+                    className="flex-1 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
+                  >
+                    📧 Enviar E-mail
+                  </Button>
+                </div>
+              </div>
+              
+              <div className="bg-blue-50 rounded-xl p-6 border border-blue-200">
+                <div className="flex items-center justify-center space-x-2 mb-3">
+                  <Shield className="w-5 h-5 text-blue-600" />
+                  <span className="font-semibold text-blue-800">100% Seguro e Gratuito</span>
+                </div>
+                <p className="text-sm text-blue-700 text-center">
+                  🔒 Seus dados estão protegidos. Não compartilhamos informações pessoais.<br/>
+                  ⚡ Resposta em até 24 horas • 🎯 Orçamento sem compromisso
+                </p>
+              </div>
+            </div>
             
             {/* Benefícios em destaque */}
             <div className="grid md:grid-cols-3 gap-6 mt-12 pt-8 border-t border-gray-200">
