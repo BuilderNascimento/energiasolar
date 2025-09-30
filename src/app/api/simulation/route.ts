@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/db';
+import { Prisma } from '@prisma/client';
 
 // Schema de validação para simulação
 const simulationSchema = z.object({
@@ -172,11 +173,10 @@ export async function GET(request: NextRequest) {
     const installationType = searchParams.get('installationType');
     
     // Construir filtros
-    const where: { location?: { contains: string; mode: string }; installationType?: 'RESIDENCIAL' | 'COMERCIAL' } = {};
+    const where: Prisma.SimulationWhereInput = {};
     if (location) {
       where.location = {
-        contains: location,
-        mode: 'insensitive'
+        contains: location
       };
     }
     if (installationType) {
