@@ -275,6 +275,28 @@ Tipo: ${dados.tipo}`;
   ];
 
   const calculateSimulation = async () => {
+    // CAPTURAR E ENVIAR LEAD PRIMEIRO
+    const dados = {
+      data: new Date().toLocaleString('pt-BR'),
+      nome: fullName,
+      whatsapp: phone,
+      conta_luz: monthlyBill,
+      localizacao: location,
+      tipo: installationType
+    };
+    
+    // Enviar para Make.com
+    try {
+      await fetch('https://hook.us2.make.com/r2xd623jbg2gtrt1y4ganx754bam51xy', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(dados)
+      });
+      console.log('✅ Lead capturado com sucesso!', dados);
+    } catch (error) {
+      console.error('❌ Erro ao capturar lead:', error);
+    }
+    
     // Validação simplificada - apenas conta de luz é obrigatória
     if (!monthlyBill || parseFloat(monthlyBill) <= 0) {
       alert('Por favor, informe o valor da sua conta de luz para calcular a economia!');

@@ -85,66 +85,6 @@ export default function RootLayout({
         <Providers>
           {children}
         </Providers>
-        
-        <Script id="lead-capture" strategy="afterInteractive">
-          {`
-            document.addEventListener('DOMContentLoaded', function() {
-              // Aguardar um pouco para garantir que o formulário foi renderizado
-              setTimeout(function() {
-                const form = document.querySelector('form');
-                if (form) {
-                  form.addEventListener('submit', async function(e) {
-                    e.preventDefault();
-                    
-                    // Capturar os dados com os IDs corretos
-                    const dados = {
-                      data: new Date().toLocaleString('pt-BR'),
-                      nome: document.getElementById('fullName')?.value || '',
-                      whatsapp: document.getElementById('phone')?.value || '',
-                      conta_luz: document.getElementById('bill')?.value || '',
-                      localizacao: document.getElementById('location')?.value || '',
-                      tipo: document.getElementById('installation-type')?.value || ''
-                    };
-                    
-                    // Enviar para Make.com
-                    try {
-                      await fetch('https://hook.us2.make.com/r2xd623jbg2gtrt1y4ganx754bam51xy', {
-                        method: 'POST',
-                        headers: {
-                          'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(dados)
-                      });
-                      
-                      console.log('✅ Lead capturado com sucesso!', dados);
-                    } catch (error) {
-                      console.error('❌ Erro ao capturar lead:', error);
-                    }
-                    
-                    // Continuar com a lógica normal do formulário
-                    // Disparar o evento de submit original
-                    const submitEvent = new Event('submit', { bubbles: true, cancelable: true });
-                    Object.defineProperty(submitEvent, 'target', { value: form });
-                    
-                    // Remover temporariamente este listener para evitar loop
-                    form.removeEventListener('submit', arguments.callee);
-                    
-                    // Simular o submit original
-                    const calculateButton = form.querySelector('button[type="submit"], button:not([type])');
-                    if (calculateButton && calculateButton.onclick) {
-                      calculateButton.click();
-                    }
-                    
-                    // Reativar o listener após um tempo
-                    setTimeout(() => {
-                      form.addEventListener('submit', arguments.callee);
-                    }, 100);
-                  });
-                }
-              }, 1000);
-            });
-          `}
-        </Script>
       </body>
     </html>
   );
