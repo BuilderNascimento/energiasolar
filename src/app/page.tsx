@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
 
-import { Sun, Zap, DollarSign, Leaf, Shield, Award, Star, Phone, Mail, MapPin, Users } from "lucide-react";
+import { Sun, Zap, DollarSign, Leaf, Shield, Award, Star, Phone, Mail, MapPin, Users, Menu, X } from "lucide-react";
 import Chatbot from "@/components/Chatbot";
 import Carousel from "@/components/Carousel";
 
@@ -108,6 +108,7 @@ export default function Home() {
     consumption: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   // Estados para animação dos números
   const [isStatsVisible, setIsStatsVisible] = useState(false);
@@ -565,8 +566,8 @@ Tipo: ${dados.tipo}`;
       {/* Header */}
       <header className="bg-blue-900 shadow-xl sticky top-0 z-50 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto container-padding">
-          <div className="flex justify-center items-center py-4">
-            <div className="flex items-center mr-8">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center">
               <Image
                 src="/logo principal.png"
                 alt="Nova Era"
@@ -577,6 +578,8 @@ Tipo: ${dados.tipo}`;
                 priority
               />
             </div>
+            
+            {/* Menu Desktop */}
             <nav className="hidden lg:flex space-x-8">
               <a href="#home" className="text-yellow-300 hover:text-yellow-400 font-bold text-sm transition-colors uppercase tracking-wide">HOME</a>
               <a href="#about" className="text-yellow-300 hover:text-yellow-400 font-bold text-sm transition-colors uppercase tracking-wide">QUEM SOMOS</a>
@@ -587,7 +590,80 @@ Tipo: ${dados.tipo}`;
               <a href="#educational" className="text-yellow-300 hover:text-yellow-400 font-bold text-sm transition-colors uppercase tracking-wide">EDUCACIONAL</a>
               <a href="#contact" className="text-yellow-300 hover:text-yellow-400 font-bold text-sm transition-colors uppercase tracking-wide">CONTATO</a>
             </nav>
+
+            {/* Botão Menu Mobile */}
+            <button
+              className="lg:hidden text-yellow-300 hover:text-yellow-400 transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Menu"
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
+
+          {/* Menu Mobile */}
+          {isMobileMenuOpen && (
+            <div className="lg:hidden bg-blue-800 border-t border-blue-700">
+              <nav className="py-4 space-y-2">
+                <a 
+                  href="#home" 
+                  className="block px-4 py-2 text-yellow-300 hover:text-yellow-400 hover:bg-blue-700 font-bold text-sm transition-colors uppercase tracking-wide"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  HOME
+                </a>
+                <a 
+                  href="#about" 
+                  className="block px-4 py-2 text-yellow-300 hover:text-yellow-400 hover:bg-blue-700 font-bold text-sm transition-colors uppercase tracking-wide"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  QUEM SOMOS
+                </a>
+                <a 
+                  href="#services" 
+                  className="block px-4 py-2 text-yellow-300 hover:text-yellow-400 hover:bg-blue-700 font-bold text-sm transition-colors uppercase tracking-wide"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  O QUE FAZEMOS
+                </a>
+                <a 
+                  href="#energy" 
+                  className="block px-4 py-2 text-yellow-300 hover:text-yellow-400 hover:bg-blue-700 font-bold text-sm transition-colors uppercase tracking-wide"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  ENERGIA FOTOVOLTAICA
+                </a>
+                <a 
+                  href="#mobility" 
+                  className="block px-4 py-2 text-yellow-300 hover:text-yellow-400 hover:bg-blue-700 font-bold text-sm transition-colors uppercase tracking-wide"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  MOBILIDADE ELÉTRICA
+                </a>
+                <a 
+                  href="#projects" 
+                  className="block px-4 py-2 text-yellow-300 hover:text-yellow-400 hover:bg-blue-700 font-bold text-sm transition-colors uppercase tracking-wide"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  PROJETOS
+                </a>
+                <a 
+                  href="#educational" 
+                  className="block px-4 py-2 text-yellow-300 hover:text-yellow-400 hover:bg-blue-700 font-bold text-sm transition-colors uppercase tracking-wide"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  EDUCACIONAL
+                </a>
+                <a 
+                  href="#contact" 
+                  className="block px-4 py-2 text-yellow-300 hover:text-yellow-400 hover:bg-blue-700 font-bold text-sm transition-colors uppercase tracking-wide"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  CONTATO
+                </a>
+              </nav>
+            </div>
+          )}
         </div>
       </header>
 
