@@ -37,13 +37,45 @@ export default function RootLayout({
             const SUPABASE_URL = 'https://kjjybkcycorwzrboutui.supabase.co';
             const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtqanlia2N5Y29yd3pyYm91dHVpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkxNjc4MTcsImV4cCI6MjA3NDc0MzgxN30.KyUB1WLqHzaYwqUKikqOh01V8cG-3Lf-_oKP2Ske_9I';
             
-            // Aguardar o carregamento do Supabase
-            window.addEventListener('DOMContentLoaded', function() {
+            console.log('🔄 Iniciando configuração do Supabase...');
+            
+            // Função para tentar conectar ao Supabase
+            function connectSupabase() {
+              console.log('🔍 Verificando se window.supabase existe:', !!window.supabase);
+              
               if (window.supabase) {
-                window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-                console.log('✅ Supabase conectado!');
+                try {
+                  window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+                  console.log('✅ Supabase conectado com sucesso!');
+                  console.log('📊 Cliente Supabase:', window.supabaseClient);
+                  
+                  // Testar conexão
+                  window.supabaseClient.from('leads').select('count').limit(1)
+                    .then(result => {
+                      console.log('🧪 Teste de conexão com tabela leads:', result);
+                    })
+                    .catch(err => {
+                      console.error('❌ Erro no teste de conexão:', err);
+                    });
+                } catch (error) {
+                  console.error('❌ Erro ao criar cliente Supabase:', error);
+                }
+              } else {
+                console.log('⏳ Supabase ainda não carregou, tentando novamente em 500ms...');
+                setTimeout(connectSupabase, 500);
               }
-            });
+            }
+            
+            // Aguardar o carregamento do Supabase
+            window.addEventListener('DOMContentLoaded', connectSupabase);
+            
+            // Também tentar imediatamente caso já esteja carregado
+            if (document.readyState === 'loading') {
+              console.log('📄 Documento ainda carregando...');
+            } else {
+              console.log('📄 Documento já carregado, conectando imediatamente...');
+              connectSupabase();
+            }
           `}
         </Script>
       </head>

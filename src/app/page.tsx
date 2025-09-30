@@ -380,14 +380,6 @@ Tipo: ${dados.tipo}`;
       panelCount: results.panels,
       roofArea: 50, // valor padrão
       co2Reduction: results.co2Reduction
-    }, {
-      monthlyBill: parseFloat(monthlyBill),
-      location,
-      installationType,
-      roofType: 'ceramica', // valor padrão
-      hasShading: false, // valor padrão
-      fullName,
-      phone
     });
     
     // Scroll suave para os resultados
@@ -416,30 +408,52 @@ Tipo: ${dados.tipo}`;
     interest: string;
     message: string;
   }) => {
+    console.log('🚀 Iniciando salvamento de lead no Supabase:', leadData);
+    
     try {
       if (typeof window !== 'undefined' && (window as WindowWithSupabase).supabaseClient) {
+        console.log('✅ Cliente Supabase encontrado, enviando dados...');
+        
+        const dataToInsert = {
+          full_name: leadData.name,
+          email: leadData.email || 'nao-informado@email.com',
+          phone: leadData.phone,
+          monthly_bill: parseFloat(monthlyBill || '0'),
+          location: location || 'Não informado',
+          installation_type: installationType || 'residencial',
+          interest: leadData.interest,
+          message: leadData.message,
+          monthly_consumption: monthlyConsumption || '',
+          residents: residents || '',
+          roof_area: roofArea || '',
+          source: 'website_form',
+          created_at: new Date().toISOString()
+        };
+        
+        console.log('📤 Dados a serem inseridos:', dataToInsert);
+        
         const { data, error } = await (window as WindowWithSupabase).supabaseClient!
           .from('leads')
-          .insert([
-            {
-              name: leadData.name,
-              email: leadData.email,
-              phone: leadData.phone,
-              interest: leadData.interest,
-              message: leadData.message,
-              source: 'website_form',
-              created_at: new Date().toISOString()
-            }
-          ]);
+          .insert([dataToInsert]);
+        
+        console.log('📥 Resposta do Supabase:');
+        console.log('- data:', data);
+        console.log('- error:', error);
         
         if (error) {
-          console.error('Erro ao salvar lead no Supabase:', error);
+          console.error('❌ Erro ao salvar lead no Supabase:', error);
+          alert(`Erro ao salvar lead: ${error.message}`);
         } else {
-          console.log('✅ Lead salvo no Supabase:', data);
+          console.log('✅ Lead salvo no Supabase com sucesso:', data);
+          alert('Lead salvo com sucesso!');
         }
+      } else {
+        console.error('❌ Cliente Supabase não encontrado!');
+        alert('Erro: Cliente Supabase não está conectado. Verifique o console para mais detalhes.');
       }
     } catch (error) {
-      console.error('Erro na conexão com Supabase:', error);
+      console.error('❌ Erro na conexão com Supabase:', error);
+      alert(`Erro na conexão: ${error}`);
     }
   };
 
@@ -451,50 +465,59 @@ Tipo: ${dados.tipo}`;
     panelCount: number;
     roofArea: number;
     co2Reduction: number;
-  }, formData: {
-    monthlyBill: number;
-    installationType: string;
-    roofType: string;
-    hasShading: boolean;
-    location: string;
-    fullName: string;
-    phone: string;
   }) => {
+    console.log('🚀 Iniciando salvamento de simulação no Supabase:');
+    console.log('- simulationData:', simulationData);
+    
     try {
       if (typeof window !== 'undefined' && (window as WindowWithSupabase).supabaseClient) {
+        console.log('✅ Cliente Supabase encontrado, enviando dados...');
+        
+        const dataToInsert = {
+          monthly_bill: parseFloat(monthlyBill || '0'),
+          location: location || 'Não informado',
+          installation_type: installationType || 'residencial',
+          full_name: fullName || 'Não informado',
+          phone: phone || 'Não informado',
+          panels: simulationData.panelCount,
+          system_size: simulationData.systemPower,
+          monthly_production: simulationData.monthlyEconomy,
+          monthly_savings: simulationData.monthlyEconomy,
+          annual_savings: simulationData.monthlyEconomy * 12,
+          system_cost: simulationData.systemPower * 4800,
+          payback_years: (simulationData.systemPower * 4800) / (simulationData.monthlyEconomy * 12),
+          roi: ((simulationData.totalEconomy - (simulationData.systemPower * 4800)) / (simulationData.systemPower * 4800)) * 100,
+          co2_reduction: simulationData.co2Reduction,
+          savings_in_25_years: simulationData.totalEconomy,
+          region_factor: 4.7,
+          source: 'website_simulator',
+          created_at: new Date().toISOString()
+        };
+        
+        console.log('📤 Dados a serem inseridos:', dataToInsert);
+        
         const { data, error } = await (window as WindowWithSupabase).supabaseClient!
           .from('simulations')
-          .insert([
-            {
-              monthly_bill: formData.monthlyBill,
-              location: formData.location,
-              installation_type: formData.installationType,
-              full_name: formData.fullName,
-              phone: formData.phone,
-              panels: simulationData.panelCount,
-              system_size: simulationData.systemPower,
-              monthly_production: simulationData.monthlyEconomy,
-              monthly_savings: simulationData.monthlyEconomy,
-              annual_savings: simulationData.monthlyEconomy * 12,
-              system_cost: simulationData.systemPower * 4800,
-              payback_years: (simulationData.systemPower * 4800) / (simulationData.monthlyEconomy * 12),
-              roi: ((simulationData.totalEconomy - (simulationData.systemPower * 4800)) / (simulationData.systemPower * 4800)) * 100,
-              co2_reduction: simulationData.co2Reduction,
-              savings_in_25_years: simulationData.totalEconomy,
-              region_factor: 4.7,
-              source: 'website_simulator',
-              created_at: new Date().toISOString()
-            }
-          ]);
+          .insert([dataToInsert]);
+        
+        console.log('📥 Resposta do Supabase:');
+        console.log('- data:', data);
+        console.log('- error:', error);
         
         if (error) {
-          console.error('Erro ao salvar simulação no Supabase:', error);
+          console.error('❌ Erro ao salvar simulação no Supabase:', error);
+          alert(`Erro ao salvar simulação: ${error.message}`);
         } else {
-          console.log('✅ Simulação salva no Supabase:', data);
+          console.log('✅ Simulação salva no Supabase com sucesso:', data);
+          alert('Simulação salva com sucesso!');
         }
+      } else {
+        console.error('❌ Cliente Supabase não encontrado!');
+        alert('Erro: Cliente Supabase não está conectado. Verifique o console para mais detalhes.');
       }
     } catch (error) {
-      console.error('Erro na conexão com Supabase:', error);
+      console.error('❌ Erro na conexão com Supabase:', error);
+      alert(`Erro na conexão: ${error}`);
     }
   };
 
@@ -794,14 +817,6 @@ Tipo: ${dados.tipo}`;
                             panelCount: simulationResults.panels,
                             roofArea: 50,
                             co2Reduction: simulationResults.co2Reduction
-                          }, {
-                            monthlyBill: parseFloat(monthlyBill),
-                            location,
-                            installationType,
-                            roofType: 'ceramica',
-                            hasShading: false,
-                            fullName,
-                            phone
                           });
                           
                           const message = `Olá! Vi a simulação no site e gostaria de mais informações sobre o sistema solar de ${simulationResults.systemSize.toFixed(1)} kWp (${simulationResults.panels} painéis) que geraria ${simulationResults.monthlyProduction.toFixed(0)} kWh/mês com economia de R$ ${simulationResults.monthlySavings.toFixed(2)}/mês e payback de ${simulationResults.payback.toFixed(1)} anos. Investimento: R$ ${(simulationResults.systemCost / 1000).toFixed(0)}k. Pode me ajudar?`;
