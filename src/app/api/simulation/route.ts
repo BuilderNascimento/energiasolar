@@ -180,7 +180,7 @@ export async function GET(request: NextRequest) {
       };
     }
     if (installationType) {
-      where.installationType = installationType.toUpperCase() as 'RESIDENCIAL' | 'COMERCIAL';
+      where.installationType = installationType.toUpperCase() as 'RESIDENCIAL' | 'COMERCIAL' | 'INDUSTRIAL';
     }
     
     // Buscar simulações do banco de dados
