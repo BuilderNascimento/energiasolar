@@ -2,12 +2,12 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
 
-import { ChevronLeft, ChevronRight, Sun, Zap, DollarSign, Leaf, Shield, Award, Star, Phone, Mail, MapPin, Users } from "lucide-react";
+import { Sun, Zap, DollarSign, Leaf, Shield, Award, Star, Phone, Mail, MapPin, Users } from "lucide-react";
 import Chatbot from "@/components/Chatbot";
 import Carousel from "@/components/Carousel";
 
@@ -28,6 +28,7 @@ interface WindowWithSupabase extends Window {
 // Interface para resultados da simulação
 interface SimulationResults {
   panels: number;
+  systemSize: number;
   monthlyProduction: number;
   monthlySavings: number;
   annualSavings: number;
@@ -35,6 +36,10 @@ interface SimulationResults {
   co2Reduction: number;
   savingsPercentage: number;
   payback: number;
+  systemCost: number;
+  roi: number;
+  savingsIn25Years: number;
+  regionFactor: number;
 }
 
 // Hook para animação de contagem
@@ -79,19 +84,15 @@ const useCountUp = (end: number, duration: number = 2000, shouldStart: boolean =
 };
 
 export default function Home() {
-  const [currentSlide, setCurrentSlide] = useState(0);
   // Campos básicos obrigatórios
   const [monthlyBill, setMonthlyBill] = useState("");
   const [location, setLocation] = useState("");
   const [installationType, setInstallationType] = useState("");
   // Campos opcionais
-  const [monthlyConsumption, setMonthlyConsumption] = useState("");
-  const [residents, setResidents] = useState("");
-  const [roofArea, setRoofArea] = useState("");
+  const [monthlyConsumption] = useState("");
   // Campos estratégicos para leads
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
   // Resultados
   const [simulationResults, setSimulationResults] = useState<SimulationResults | null>(null);
   
@@ -368,15 +369,23 @@ Tipo: ${dados.tipo}`;
       email: '', // Email não é obrigatório no simulador
       phone: phone,
       interest: `Simulação de ${installationType} - Conta: R$ ${monthlyBill}`,
-      message: `Simulação realizada: ${estimatedPanels} painéis, economia de R$ ${monthlySavings.toFixed(2)}/mês`,
-      source: 'website_simulator'
+      message: `Simulação realizada: ${estimatedPanels} painéis, economia de R$ ${monthlySavings.toFixed(2)}/mês`
     });
     
     // Salvar simulação no Supabase
-    await saveSimulationToSupabase(results, {
-      monthlyBill,
+    await saveSimulationToSupabase({
+      monthlyEconomy: results.monthlySavings,
+      totalEconomy: results.savingsIn25Years,
+      systemPower: results.systemSize,
+      panelCount: results.panels,
+      roofArea: 50, // valor padrão
+      co2Reduction: results.co2Reduction
+    }, {
+      monthlyBill: parseFloat(monthlyBill),
       location,
       installationType,
+      roofType: 'ceramica', // valor padrão
+      hasShading: false, // valor padrão
       fullName,
       phone
     });
@@ -409,7 +418,7 @@ Tipo: ${dados.tipo}`;
   }) => {
     try {
       if (typeof window !== 'undefined' && (window as WindowWithSupabase).supabaseClient) {
-        const { data, error } = await (window as WindowWithSupabase).supabaseClient
+        const { data, error } = await (window as WindowWithSupabase).supabaseClient!
           .from('leads')
           .insert([
             {
@@ -448,10 +457,12 @@ Tipo: ${dados.tipo}`;
     roofType: string;
     hasShading: boolean;
     location: string;
+    fullName: string;
+    phone: string;
   }) => {
     try {
       if (typeof window !== 'undefined' && (window as WindowWithSupabase).supabaseClient) {
-        const { data, error } = await (window as WindowWithSupabase).supabaseClient
+        const { data, error } = await (window as WindowWithSupabase).supabaseClient!
           .from('simulations')
           .insert([
             {
@@ -460,17 +471,17 @@ Tipo: ${dados.tipo}`;
               installation_type: formData.installationType,
               full_name: formData.fullName,
               phone: formData.phone,
-              panels: simulationData.panels,
-              system_size: simulationData.systemSize,
-              monthly_production: simulationData.monthlyProduction,
-              monthly_savings: simulationData.monthlySavings,
-              annual_savings: simulationData.annualSavings,
-              system_cost: simulationData.systemCost,
-              payback_years: simulationData.payback,
-              roi: simulationData.roi,
+              panels: simulationData.panelCount,
+              system_size: simulationData.systemPower,
+              monthly_production: simulationData.monthlyEconomy,
+              monthly_savings: simulationData.monthlyEconomy,
+              annual_savings: simulationData.monthlyEconomy * 12,
+              system_cost: simulationData.systemPower * 4800,
+              payback_years: (simulationData.systemPower * 4800) / (simulationData.monthlyEconomy * 12),
+              roi: ((simulationData.totalEconomy - (simulationData.systemPower * 4800)) / (simulationData.systemPower * 4800)) * 100,
               co2_reduction: simulationData.co2Reduction,
-              savings_in_25_years: simulationData.savingsIn25Years,
-              region_factor: simulationData.regionFactor,
+              savings_in_25_years: simulationData.totalEconomy,
+              region_factor: 4.7,
               source: 'website_simulator',
               created_at: new Date().toISOString()
             }
@@ -776,10 +787,19 @@ Tipo: ${dados.tipo}`;
                       <Button 
                         onClick={async () => {
                           // Salvar simulação no Supabase
-                          await saveSimulationToSupabase(simulationResults, {
-                            monthlyBill,
+                          await saveSimulationToSupabase({
+                            monthlyEconomy: simulationResults.monthlySavings,
+                            totalEconomy: simulationResults.savingsIn25Years,
+                            systemPower: simulationResults.systemSize,
+                            panelCount: simulationResults.panels,
+                            roofArea: 50,
+                            co2Reduction: simulationResults.co2Reduction
+                          }, {
+                            monthlyBill: parseFloat(monthlyBill),
                             location,
                             installationType,
+                            roofType: 'ceramica',
+                            hasShading: false,
                             fullName,
                             phone
                           });

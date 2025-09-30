@@ -15,7 +15,7 @@ const simulationSchema = z.object({
 
 // Função para calcular simulação de energia solar
 function calculateSolarSimulation(data: z.infer<typeof simulationSchema>) {
-  const { monthlyBill, location, installationType, monthlyConsumption, roofArea } = data;
+  const { monthlyBill, location, installationType, monthlyConsumption } = data;
   
   // Fatores de cálculo baseados na localização (simplificado)
   const locationFactors: Record<string, number> = {
@@ -172,7 +172,7 @@ export async function GET(request: NextRequest) {
     const installationType = searchParams.get('installationType');
     
     // Construir filtros
-    const where: any = {};
+    const where: { location?: { contains: string; mode: string }; installationType?: 'RESIDENCIAL' | 'COMERCIAL' } = {};
     if (location) {
       where.location = {
         contains: location,
@@ -180,7 +180,7 @@ export async function GET(request: NextRequest) {
       };
     }
     if (installationType) {
-      where.installationType = installationType.toUpperCase();
+      where.installationType = installationType.toUpperCase() as 'RESIDENCIAL' | 'COMERCIAL';
     }
     
     // Buscar simulações do banco de dados

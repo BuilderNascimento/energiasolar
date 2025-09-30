@@ -73,9 +73,9 @@ export async function GET(request: NextRequest) {
     const status = searchParams.get('status');
     
     // Construir filtros
-    const where: { status?: string } = {};
+    const where: { status?: 'NEW' | 'CONTACTED' | 'QUALIFIED' | 'CONVERTED' | 'LOST' } = {};
     if (status) {
-      where.status = status.toUpperCase();
+      where.status = status.toUpperCase() as 'NEW' | 'CONTACTED' | 'QUALIFIED' | 'CONVERTED' | 'LOST';
     }
     
     // Buscar leads do banco de dados

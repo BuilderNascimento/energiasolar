@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { seedDatabase } from '@/lib/db';
 
 // POST - Popular banco de dados com dados iniciais
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
     // Verificar se é ambiente de desenvolvimento
     if (process.env.NODE_ENV === 'production') {

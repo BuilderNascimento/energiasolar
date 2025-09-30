@@ -23,9 +23,9 @@ export async function GET(request: NextRequest) {
     const inStock = searchParams.get('inStock');
     
     // Construir filtros
-    const where: any = {};
+    const where: { type?: 'PATINETE' | 'BIKE' | 'SCOOTER'; inStock?: boolean } = {};
     if (type) {
-      where.type = type.toUpperCase();
+      where.type = type.toUpperCase() as 'PATINETE' | 'BIKE' | 'SCOOTER';
     }
     if (inStock !== null) {
       where.inStock = inStock === 'true';
