@@ -365,25 +365,6 @@ Tipo: ${dados.tipo}`;
     
     setSimulationResults(results);
     
-    // Salvar lead no Supabase
-    await saveLeadToSupabase({
-      name: fullName,
-      email: '', // Email não é obrigatório no simulador
-      phone: phone,
-      interest: `Simulação de ${installationType} - Conta: R$ ${monthlyBill}`,
-      message: `Simulação realizada: ${estimatedPanels} painéis, economia de R$ ${monthlySavings.toFixed(2)}/mês`
-    });
-    
-    // Salvar simulação no Supabase
-    await saveSimulationToSupabase({
-      monthlyEconomy: results.monthlySavings,
-      totalEconomy: results.savingsIn25Years,
-      systemPower: results.systemSize,
-      panelCount: results.panels,
-      roofArea: 50, // valor padrão
-      co2Reduction: results.co2Reduction
-    });
-    
     // Scroll suave para os resultados
     setTimeout(() => {
       const resultsElement = document.querySelector('.animate-fade-in');
@@ -808,19 +789,9 @@ Tipo: ${dados.tipo}`;
                       </div>
                       
                       <Button 
-                        onClick={async () => {
-                          // Salvar simulação no Supabase
-                          await saveSimulationToSupabase({
-                            monthlyEconomy: simulationResults.monthlySavings,
-                            totalEconomy: simulationResults.savingsIn25Years,
-                            systemPower: simulationResults.systemSize,
-                            panelCount: simulationResults.panels,
-                            roofArea: 50,
-                            co2Reduction: simulationResults.co2Reduction
-                          });
-                          
+                        onClick={() => {
                           const message = `Olá! Vi a simulação no site e gostaria de mais informações sobre o sistema solar de ${simulationResults.systemSize.toFixed(1)} kWp (${simulationResults.panels} painéis) que geraria ${simulationResults.monthlyProduction.toFixed(0)} kWh/mês com economia de R$ ${simulationResults.monthlySavings.toFixed(2)}/mês e payback de ${simulationResults.payback.toFixed(1)} anos. Investimento: R$ ${(simulationResults.systemCost / 1000).toFixed(0)}k. Pode me ajudar?`;
-                          const whatsappURL = `https://wa.me/330783837981?text=${encodeURIComponent(message)}`;
+                          const whatsappURL = `https://wa.me/5514998205972?text=${encodeURIComponent(message)}`;
                           window.open(whatsappURL, '_blank');
                         }}
                         className="w-full gradient-solar hover-lift text-white font-semibold py-3 text-sm shadow-lg"
