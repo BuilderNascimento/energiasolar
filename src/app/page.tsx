@@ -90,6 +90,8 @@ export default function Home() {
   const [installationType, setInstallationType] = useState("");
   // Campos opcionais
   const [monthlyConsumption] = useState("");
+  const [residents, setResidents] = useState("");
+  const [roofArea, setRoofArea] = useState("");
   // Campos estratégicos para leads
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
