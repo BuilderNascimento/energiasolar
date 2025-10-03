@@ -94,6 +94,7 @@ export default function Home() {
   const [roofArea, setRoofArea] = useState("");
   // Campos estratégicos para leads
   const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   // Resultados
   const [simulationResults, setSimulationResults] = useState<SimulationResults | null>(null);
@@ -279,6 +280,7 @@ Tipo: ${dados.tipo}`;
     const dados = {
       data: new Date().toLocaleString('pt-BR'),
       nome: fullName,
+      email: email,
       whatsapp: phone,
       conta_luz: monthlyBill,
       localizacao: location,
@@ -798,6 +800,18 @@ Tipo: ${dados.tipo}`;
                         placeholder="Como podemos te chamar?"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
+                        required
+                        className="bg-blue-700/50 border-blue-500 text-white placeholder-blue-300 h-10 text-sm focus:border-yellow-400 transition-colors"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="email" className="text-sm text-blue-100 font-medium">E-mail *</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        placeholder="seu@email.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                         className="bg-blue-700/50 border-blue-500 text-white placeholder-blue-300 h-10 text-sm focus:border-yellow-400 transition-colors"
                       />
